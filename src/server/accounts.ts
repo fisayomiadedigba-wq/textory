@@ -46,6 +46,20 @@ export async function assertAccountAvailable({ username, email }: { username: st
 }
 
 /**
+ * Creates an account directly without email verification.
+ */
+export async function createAccount(input: { username: string; email: string; displayName?: string; passwordHash: string }) {
+  await assertAccountAvailable(input);
+  const user = await UserModel.create({
+    username: input.username,
+    email: input.email,
+    displayName: input.displayName ?? input.username,
+    passwordHash: input.passwordHash,
+  });
+  return user;
+}
+
+/**
  * Step 1 of signing up (after `assertAccountAvailable`): remembers the details and emails a
  * 6-digit code. Asking again replaces the earlier code. The account itself is made by `finishSignUp`.
  */

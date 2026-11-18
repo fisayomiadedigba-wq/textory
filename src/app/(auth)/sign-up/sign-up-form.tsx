@@ -8,26 +8,21 @@ import type { ZodTypeAny } from 'zod';
 import { Check, ChevronLeft, CircleCheck, Eye, EyeOff, LoaderCircle } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { FieldError, FormError, TextField } from '@/components/app/fields';
-import { OtpInput } from '@/components/app/otp-input';
 import { cx, PillButton } from '@/components/app/primitives';
-import { useToast } from '@/components/app/toast';
 import { api, ApiClientError, errorMessage } from '@/lib/client/api';
 import { useCurrentUser } from '@/lib/client/hooks';
 import { emailSchema, passwordSchema, signUpSchema } from '@/schemas/auth';
 import { AuthLogo } from '../auth-card';
 import { GoogleButton } from '../google-button';
-import { ResendCode } from '../resend-code';
 
 type Fields = Record<string, string[] | undefined>;
 type Form = { email: string; password: string; displayName: string; username: string };
-type CodeSent = { expiresInMinutes: number; resendAfterSeconds: number };
 
 // Spotify's sign-up flow: the email on the first screen, then numbered steps under a progress bar.
-// The last step checks the emailed code; the account is only created once it's right.
-const STEP_TITLES = ['', 'Create a password', 'Tell us about yourself', 'Verify your email'];
+const STEP_TITLES = ['', 'Create a password', 'Tell us about yourself'];
 const LAST_STEP = STEP_TITLES.length - 1;
 // The step that shows each field, so server errors can send the user back to it.
-const FIELD_STEP: Record<string, number> = { email: 0, password: 1, displayName: 2, username: 2, code: 3 };
+const FIELD_STEP: Record<string, number> = { email: 0, password: 1, displayName: 2, username: 2 };
 const MIN_PASSWORD = 8;
 
 export default function SignUpForm({ google }: { google: boolean }) {
@@ -40,10 +35,7 @@ export default function SignUpForm({ google }: { google: boolean }) {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [triedPassword, setTriedPassword] = useState(false);
-  const [code, setCode] = useState('');
-  const [sent, setSent] = useState<CodeSent & { at: number }>();
   const usernameStatus = useUsernameStatus(form.username);
-  const { toast } = useToast();
 
   useEffect(() => {
     if (signedIn) router.replace('/');
@@ -88,50 +80,20 @@ export default function SignUpForm({ google }: { google: boolean }) {
     goTo(2);
   };
 
-  /** Checks the details and emails a code (again, when resending). Returns false if that failed. */
-  const sendCode = async () => {
-    setError(null);
-    const parsed = signUpSchema.safeParse({ ...form, displayName: form.displayName.trim() || undefined });
-    if (!parsed.success) {
-      showFieldErrors(parsed.error.flatten().fieldErrors);
-      return false;
-    }
-    try {
-      const result = await api<CodeSent>('/api/auth/sign-up', { method: 'POST', json: parsed.data });
-      setSent({ ...result, at: Date.now() });
-      setCode('');
-      setFields({});
-      return true;
-    } catch (caught) {
-      if (caught instanceof ApiClientError && caught.fields) showFieldErrors(caught.fields);
-      else setError(errorMessage(caught));
-      return false;
-    }
-  };
-
+  /** Creates the account directly and signs in. */
   const submitProfile = async (event: React.FormEvent) => {
     event.preventDefault();
     if (usernameStatus.available === false) return;
     setLoading(true);
-    if (await sendCode()) goTo(3);
-    setLoading(false);
-  };
-
-  const resend = async () => {
-    if (await sendCode()) toast('We sent you a new code');
-  };
-
-  /** Creates the account with the emailed code, then signs in. */
-  const submitCode = async (value = code) => {
-    if (loading) return;
     setError(null);
-    if (value.length < 6) {
-      setFields({ code: ['Enter all 6 digits.'] });
+    const parsed = signUpSchema.safeParse({ ...form, displayName: form.displayName.trim() || undefined });
+    if (!parsed.success) {
+      showFieldErrors(parsed.error.flatten().fieldErrors);
+      setLoading(false);
       return;
     }
-    setLoading(true);
     try {
-      await api('/api/auth/sign-up/verify', { method: 'POST', json: { email: form.email, code: value } });
+      await api('/api/auth/sign-up', { method: 'POST', json: parsed.data });
       const result = await signIn('credentials', { identifier: form.email, password: form.password, redirect: false });
       if (result?.error) {
         router.push('/sign-in');
@@ -272,42 +234,6 @@ export default function SignUpForm({ google }: { google: boolean }) {
               <p className="text-center text-xs text-pal-subdued">
                 By signing up you agree to read kindly and write honestly on {siteConfig.name}.
               </p>
-            </form>
-          )}
-
-          {step === 3 && (
-            <form
-              key="code"
-              onSubmit={(event) => {
-                event.preventDefault();
-                void submitCode();
-              }}
-              noValidate
-              className={STEP_FORM}
-            >
-              <FormError message={error} />
-              <p className="text-pal-subdued">
-                Enter the 6-digit code we sent to <span className="break-all font-semibold text-pal-text">{form.email}</span>.
-                {sent && ` It works for ${sent.expiresInMinutes} minutes.`}
-              </p>
-              <div>
-                <OtpInput
-                  value={code}
-                  onChange={(value) => {
-                    setCode(value);
-                    setFields({ ...fields, code: undefined });
-                  }}
-                  onComplete={(value) => void submitCode(value)}
-                  invalid={Boolean(fields.code)}
-                  disabled={loading}
-                  autoFocus
-                />
-                <FieldError message={fields.code?.[0]} />
-              </div>
-              <PillButton type="submit" size="lg" center loading={loading}>
-                Verify and sign up
-              </PillButton>
-              {sent && <ResendCode availableAt={sent.at + sent.resendAfterSeconds * 1000} onResend={resend} />}
             </form>
           )}
         </>
