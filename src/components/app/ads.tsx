@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { X } from 'lucide-react';
-import { cx } from './primitives';
 
 /** Native banner ad for placement between story grids */
 export function NativeAdBanner() {
