@@ -15,7 +15,14 @@ export async function dbConnect(): Promise<void> {
   if (!uri) throw new Error('MONGODB_URI is not set');
 
   globalForMongoose.mongooseConnection ??= mongoose
-    .connect(uri, { dbName: process.env.MONGODB_DB || 'story_platform' })
+    .connect(uri, {
+      dbName: process.env.MONGODB_DB || 'story_platform',
+      maxPoolSize: 10,
+      minPoolSize: 2,
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 30000,
+      connectTimeoutMS: 10000,
+    })
     .catch((error) => {
       globalForMongoose.mongooseConnection = undefined;
       throw error;

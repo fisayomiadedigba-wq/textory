@@ -19,8 +19,9 @@ type Params = { storyId: string };
 export const POST = route<Params>(async (_request, { storyId }) => {
   const story = await requireManagedStory(storyId, await requireUser());
   const firstPublish = !story.publishedAt;
+  const wasDraft = story.status === 'draft';
 
-  const changed = await withTransaction(async (session) => {
+  await withTransaction(async (session) => {
     if (story.type === 'single') {
       const episode = await EpisodeModel.findOne({ story: story._id }).session(session);
       if (!episode || episode.wordCount === 0) throw badRequest('Write the story before publishing it.');
@@ -33,19 +34,22 @@ export const POST = route<Params>(async (_request, { storyId }) => {
       throw badRequest('Publish at least one episode before publishing the series.');
     }
 
-    const { modifiedCount } = await StoryModel.updateOne(
-      { _id: story._id, status: 'draft' },
-      { $set: { status: 'published', publishedAt: story.publishedAt ?? new Date() } },
+    // Always update to published status and set timestamps
+    await StoryModel.updateOne(
+      { _id: story._id },
+      { $set: { status: 'published', publishedAt: story.publishedAt ?? new Date(), lastPublishedAt: new Date() } },
       { session },
     );
-    if (modifiedCount === 1) {
+    
+    // Only increment channel stats if this was previously a draft
+    if (wasDraft) {
       await ChannelModel.updateOne({ _id: story.channel }, { $inc: { 'stats.stories': 1 } }, { session });
     }
+    
     await syncStoryEpisodes(story._id, session);
-    return modifiedCount === 1;
   });
 
-  if (changed && firstPublish) {
+  if (wasDraft && firstPublish) {
     notifySubscribers(story.channel, { type: 'new_story', actor: story.author, channel: story.channel, story: story._id });
   }
   return ok({ story: toStory(await loadStory(story._id)) });

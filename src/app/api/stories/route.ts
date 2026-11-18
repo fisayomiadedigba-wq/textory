@@ -16,11 +16,11 @@ import { loadStory, storyChannelPopulate } from '@/server/stories';
 type Sort = Record<string, SortOrder | { $meta: 'textScore' }>;
 
 const SORTS: Record<'updated' | 'new' | 'popular' | 'most-liked' | 'top-rated', Sort> = {
-  updated: { lastPublishedAt: -1 },
-  new: { publishedAt: -1 },
-  popular: { 'stats.views': -1 },
-  'most-liked': { 'stats.likes': -1 },
-  'top-rated': { 'rating.average': -1, 'rating.count': -1 },
+  updated: { lastPublishedAt: -1, publishedAt: -1, _id: -1 },
+  new: { publishedAt: -1, _id: -1 },
+  popular: { 'stats.views': -1, _id: -1 },
+  'most-liked': { 'stats.likes': -1, _id: -1 },
+  'top-rated': { 'rating.average': -1, 'rating.count': -1, _id: -1 },
 };
 
 /** Discover published stories: search, filter and sort. See docs/API.md for the parameters. */
