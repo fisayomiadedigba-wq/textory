@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import type { ZodTypeAny } from 'zod';
 import { Check, ChevronLeft, CircleCheck, Eye, EyeOff, LoaderCircle } from 'lucide-react';
 import { siteConfig } from '@/config/site';
-import { FieldError, FormError, TextField } from '@/components/app/fields';
+import { FormError, TextField } from '@/components/app/fields';
 import { cx, PillButton } from '@/components/app/primitives';
 import { api, ApiClientError, errorMessage } from '@/lib/client/api';
 import { useCurrentUser } from '@/lib/client/hooks';

@@ -14,7 +14,7 @@ export const POST = route(async (request) => {
   await assertAccountAvailable(input);
   await enforceRateLimit(`sign-up:email:${input.email}`, 5, 60 * 60, 'Too many sign-up attempts for this email. Try again in an hour.');
 
-  const user = await createAccount({
+  await createAccount({
     ...input,
     passwordHash: await bcrypt.hash(input.password, PASSWORD_HASH_ROUNDS),
   });
