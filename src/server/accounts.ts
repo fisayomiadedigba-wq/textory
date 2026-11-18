@@ -12,7 +12,6 @@ import {
 } from '@/lib/tokens';
 import PendingSignupModel from '@/models/PendingSignup';
 import UserModel, { type IUser } from '@/models/User';
-import { usernameSchema } from '@/schemas/auth';
 
 type Recipient = Pick<IUser, '_id' | 'email'>;
 

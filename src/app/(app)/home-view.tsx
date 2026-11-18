@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { MobileHeader } from '@/components/app/app-shell';
-import { InStoryAd, NativeAdBanner } from '@/components/app/ads';
+import { NativeAdBanner } from '@/components/app/ads';
 import { QuickTile } from '@/components/app/cards';
 import { useMainScrollTop } from '@/components/app/main-scroll';
 import { Chip, ChipRow, cx, EmptyState, PillLink } from '@/components/app/primitives';
