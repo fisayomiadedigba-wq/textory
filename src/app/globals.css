@@ -7,6 +7,7 @@
  * Fonts are set in src/app/layout.tsx (chosen on /fonts).
  * --p-* are the palette tokens behind the `pal-*` Tailwind colors (see src/app/palettes/palettes.ts).
  * The HSL tokens below them are the same colors for shadcn/ui components.
+ * Updated to trigger Vercel deployment with latest fixes.
  */
 @layer base {
   :root {
