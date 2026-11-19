@@ -38,7 +38,7 @@ export function NativeBannerAd() {
   }, []);
 
   return (
-    <div className="w-[300px] h-[250px]">
+    <div className="w-[300px] h-[250px] bg-pal-elevated border border-white/10 rounded-lg flex items-center justify-center">
       <div ref={containerRef} id={uniqueId.current} className="w-full h-full"></div>
     </div>
   );
