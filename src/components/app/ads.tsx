@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
 
 /** Grid of 4 native poster ads for home page */
@@ -51,7 +51,30 @@ export function StickySidebarAd() {
 
 /** 300x250 banner ad */
 export function NativePosterAd() {
-  return null;
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.async = true;
+    script.setAttribute('data-cfasync', 'false');
+    script.src = 'https://bauval.org/21/5d61c4106794fb6d7d92c75ce9c80650';
+    
+    if (containerRef.current) {
+      containerRef.current.appendChild(script);
+    }
+
+    return () => {
+      if (containerRef.current && script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+    };
+  }, []);
+
+  return (
+    <div className="w-[136px] shrink-0 md:w-[164px]">
+      <div ref={containerRef} id="container-5d61c4106794fb6d7d92c75ce9c80650" className="aspect-[3/2]"></div>
+    </div>
+  );
 }
 
 /** In-story ad for the reader - now uses 4-grid native ads */
