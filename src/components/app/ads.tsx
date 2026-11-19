@@ -113,7 +113,7 @@ export function StickySidebarAd() {
 /** Native poster-sized ad (same size as story cards) */
 export function NativePosterAd() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const adId = useRef(`container-${Math.random().toString(36).substr(2, 9)}`);
+  const adId = useRef(`container-${Math.random().toString(36).substr(2, 9)}-${Date.now()}`);
 
   useEffect(() => {
     const script = document.createElement('script');
