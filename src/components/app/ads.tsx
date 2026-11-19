@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { X } from 'lucide-react';
 
 /** Grid of 4 native poster ads for home page */
