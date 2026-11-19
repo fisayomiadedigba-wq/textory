@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
 
-/** Grid of 4 native poster ads for home page */
+/** Grid of 4 native poster ads for home page with multiple banners */
 export function NativeAdGrid() {
   return (
     <div className="my-6 px-4 md:px-6">
@@ -12,13 +12,27 @@ export function NativeAdGrid() {
           <NativePosterAd key={i} />
         ))}
       </div>
+      {/* Multiple banners */}
+      <div className="my-4 flex flex-col gap-4 items-center">
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className="w-[300px] h-[250px]">
+            <NativePosterAd />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
 
 /** Footer banner - 300x250 */
 export function FooterBanner() {
-  return null;
+  return (
+    <div className="my-6 mx-4 md:mx-6">
+      <div className="w-full max-w-[300px] mx-auto">
+        <NativePosterAd />
+      </div>
+    </div>
+  );
 }
 
 /** Sticky sidebar ad with close button */
@@ -77,13 +91,15 @@ export function NativePosterAd() {
   );
 }
 
-/** In-story ad for the reader - now uses 4-grid native ads */
+/** In-story ad for the reader - banners at end of story/episode */
 export function InStoryAd() {
   return (
     <div className="my-8 mx-auto max-w-2xl">
-      <div className="flex gap-4 justify-center overflow-x-auto">
+      <div className="flex flex-col gap-4 items-center">
         {[...Array(4)].map((_, i) => (
-          <NativePosterAd key={i} />
+          <div key={i} className="w-[300px] h-[250px]">
+            <NativePosterAd />
+          </div>
         ))}
       </div>
     </div>
