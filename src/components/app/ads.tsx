@@ -3,16 +3,29 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
 
-/** Native banner ad for placement between story grids */
-export function NativeAdBanner() {
+/** Grid of 5 native poster ads for home page */
+export function NativeAdGrid() {
+  return (
+    <div className="my-6 px-4 md:px-6">
+      <div className="flex gap-4 overflow-hidden">
+        {[...Array(5)].map((_, i) => (
+          <NativePosterAd key={i} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/** Footer banner - 300x250 mobile, 728x90 desktop */
+export function FooterBanner() {
   return (
     <div className="my-6 mx-4 md:mx-6">
-      <div className="relative h-[100px] w-full overflow-hidden rounded-lg bg-gradient-to-r from-pal-elevated to-pal-highlight border border-white/10">
+      <div className="relative h-[250px] md:h-[90px] w-full max-w-[728px] mx-auto overflow-hidden rounded-lg bg-gradient-to-r from-pal-elevated to-pal-highlight border border-white/10">
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center">
             <p className="text-xs text-pal-subdued uppercase tracking-wider mb-1">Advertisement</p>
             <p className="text-lg font-bold text-pal-text">Your Ad Here</p>
-            <p className="text-sm text-pal-subdued">300x100 Native Banner</p>
+            <p className="text-sm text-pal-subdued">Footer Banner</p>
           </div>
         </div>
       </div>
@@ -48,18 +61,26 @@ export function StickySidebarAd() {
   );
 }
 
-/** In-story ad for the reader */
+/** Native poster-sized ad (same size as story cards) */
+export function NativePosterAd() {
+  return (
+    <div className="w-[136px] shrink-0 md:w-[164px]">
+      <div className="aspect-[2/3] rounded-md bg-gradient-to-br from-pal-highlight to-pal-elevated flex items-center justify-center border border-white/10">
+        <div className="text-center px-2">
+          <p className="text-[10px] text-pal-subdued uppercase tracking-wider mb-1">Ad</p>
+          <p className="text-xs font-bold text-pal-text">Your Ad</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** In-story ad for the reader - now uses poster size */
 export function InStoryAd() {
   return (
     <div className="my-8 mx-auto max-w-2xl">
-      <div className="relative h-[250px] w-full overflow-hidden rounded-lg bg-gradient-to-b from-pal-elevated to-pal-highlight border border-white/10">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center">
-            <p className="text-xs text-pal-subdued uppercase tracking-wider mb-2">Advertisement</p>
-            <p className="text-xl font-bold text-pal-text mb-1">Your Ad Here</p>
-            <p className="text-sm text-pal-subdued">728x250 In-Story Banner</p>
-          </div>
-        </div>
+      <div className="flex justify-center">
+        <NativePosterAd />
       </div>
     </div>
   );

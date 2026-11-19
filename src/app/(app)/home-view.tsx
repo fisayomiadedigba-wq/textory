@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { MobileHeader } from '@/components/app/app-shell';
-import { NativeAdBanner } from '@/components/app/ads';
+import { NativeAdGrid, FooterBanner } from '@/components/app/ads';
 import { QuickTile } from '@/components/app/cards';
 import { useMainScrollTop } from '@/components/app/main-scroll';
 import { Chip, ChipRow, cx, EmptyState, PillLink } from '@/components/app/primitives';
@@ -90,7 +90,7 @@ export default function HomeView() {
         ) : (
           <div className="pb-10">
             {signedIn && filter === 'all' && <StoryShelf title="New from your subscriptions" path="/api/me/feed?limit=12" />}
-            <NativeAdBanner />
+            <NativeAdGrid />
             <StoryShelf
               title="Popular right now"
               path={`/api/stories${query({ sort: 'popular', limit: 12, type })}`}
@@ -101,14 +101,14 @@ export default function HomeView() {
               path={`/api/stories${query({ sort: 'updated', limit: 12, type })}`}
               href={`/browse${query({ sort: 'updated', type })}`}
             />
-            <NativeAdBanner />
+            <NativeAdGrid />
             {filter === 'all' && <ChannelShelf title="Popular channels" path="/api/channels?sort=popular&limit=12" href="/browse?kind=channels" />}
             <StoryShelf
               title="Top rated"
               path={`/api/stories${query({ sort: 'top-rated', limit: 12, type })}`}
               href={`/browse${query({ sort: 'top-rated', type })}`}
             />
-            <NativeAdBanner />
+            <NativeAdGrid />
             {GENRE_SHELVES.map((genre) => (
               <StoryShelf
                 key={genre.slug}
@@ -117,12 +117,13 @@ export default function HomeView() {
                 href={`/genre/${genre.slug}`}
               />
             ))}
-            <NativeAdBanner />
+            <NativeAdGrid />
             <StoryShelf
               title="New on the shelf"
               path={`/api/stories${query({ sort: 'new', limit: 12, type })}`}
               href={`/browse${query({ sort: 'new', type })}`}
             />
+            <FooterBanner />
           </div>
         )}
       </div>
