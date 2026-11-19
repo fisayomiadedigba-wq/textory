@@ -16,60 +16,9 @@ export function NativeAdGrid() {
   );
 }
 
-/** Footer banner - 300x250 mobile, 728x90 desktop */
+/** Footer banner - placeholder for future ad implementation */
 export function FooterBanner() {
-  const mobileRef = useRef<HTMLDivElement>(null);
-  const desktopRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Mobile 300x250
-    if (mobileRef.current) {
-      (window as any).atOptions = {
-        'key' : '9b940c1db26e529cc4450d3e1459e2c9',
-        'format' : 'iframe',
-        'height' : 250,
-        'width' : 300,
-        'params' : {}
-      };
-      const mobileLoadScript = document.createElement('script');
-      mobileLoadScript.src = 'https://bauval.org/22/9b940c1db26e529cc4450d3e1459e2c9';
-      mobileRef.current.appendChild(mobileLoadScript);
-    }
-
-    // Desktop 728x90
-    if (desktopRef.current) {
-      (window as any).atOptions = {
-        'key' : 'ed4cb87cefc25679a86dc22b875fa6c0',
-        'format' : 'iframe',
-        'height' : 90,
-        'width' : 728,
-        'params' : {}
-      };
-      const desktopLoadScript = document.createElement('script');
-      desktopLoadScript.src = 'https://bauval.org/22/ed4cb87cefc25679a86dc22b875fa6c0';
-      desktopRef.current.appendChild(desktopLoadScript);
-    }
-
-    return () => {
-      if (mobileRef.current) {
-        mobileRef.current.innerHTML = '';
-      }
-      if (desktopRef.current) {
-        desktopRef.current.innerHTML = '';
-      }
-    };
-  }, []);
-
-  return (
-    <div className="my-6 mx-4 md:mx-6">
-      <div className="w-full max-w-[728px] mx-auto">
-        {/* Mobile 300x250 */}
-        <div className="md:hidden h-[250px] w-[300px]" ref={mobileRef}></div>
-        {/* Desktop 728x90 */}
-        <div className="hidden md:block h-[90px] w-[728px]" ref={desktopRef}></div>
-      </div>
-    </div>
-  );
+  return null;
 }
 
 /** Sticky sidebar ad with close button */
@@ -100,32 +49,9 @@ export function StickySidebarAd() {
   );
 }
 
-/** Native poster-sized ad (same size as story cards) */
+/** Native poster-sized ad - placeholder for future implementation */
 export function NativePosterAd() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.async = true;
-    script.setAttribute('data-cfasync', 'false');
-    script.src = 'https://bauval.org/21/5d61c4106794fb6d7d92c75ce9c80650';
-    
-    if (containerRef.current) {
-      containerRef.current.appendChild(script);
-    }
-
-    return () => {
-      if (containerRef.current && script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-    };
-  }, []);
-
-  return (
-    <div className="w-[136px] shrink-0 md:w-[164px]">
-      <div ref={containerRef} id="container-5d61c4106794fb6d7d92c75ce9c80650" className="aspect-[3/2]"></div>
-    </div>
-  );
+  return null;
 }
 
 /** In-story ad for the reader - now uses 4-grid native ads */
