@@ -23,40 +23,30 @@ export function FooterBanner() {
 
   useEffect(() => {
     // Mobile 300x250
-    const mobileScript = document.createElement('script');
-    mobileScript.innerHTML = `
-      atOptions = {
+    if (mobileRef.current) {
+      (window as any).atOptions = {
         'key' : '9b940c1db26e529cc4450d3e1459e2c9',
         'format' : 'iframe',
         'height' : 250,
         'width' : 300,
         'params' : {}
       };
-    `;
-    const mobileLoadScript = document.createElement('script');
-    mobileLoadScript.src = 'https://bauval.org/22/9b940c1db26e529cc4450d3e1459e2c9';
-    
-    if (mobileRef.current) {
-      mobileRef.current.appendChild(mobileScript);
+      const mobileLoadScript = document.createElement('script');
+      mobileLoadScript.src = 'https://bauval.org/22/9b940c1db26e529cc4450d3e1459e2c9';
       mobileRef.current.appendChild(mobileLoadScript);
     }
 
     // Desktop 728x90
-    const desktopScript = document.createElement('script');
-    desktopScript.innerHTML = `
-      atOptions = {
+    if (desktopRef.current) {
+      (window as any).atOptions = {
         'key' : 'ed4cb87cefc25679a86dc22b875fa6c0',
         'format' : 'iframe',
         'height' : 90,
         'width' : 728,
         'params' : {}
       };
-    `;
-    const desktopLoadScript = document.createElement('script');
-    desktopLoadScript.src = 'https://bauval.org/22/ed4cb87cefc25679a86dc22b875fa6c0';
-    
-    if (desktopRef.current) {
-      desktopRef.current.appendChild(desktopScript);
+      const desktopLoadScript = document.createElement('script');
+      desktopLoadScript.src = 'https://bauval.org/22/ed4cb87cefc25679a86dc22b875fa6c0';
       desktopRef.current.appendChild(desktopLoadScript);
     }
 
@@ -74,9 +64,9 @@ export function FooterBanner() {
     <div className="my-6 mx-4 md:mx-6">
       <div className="w-full max-w-[728px] mx-auto">
         {/* Mobile 300x250 */}
-        <div className="md:hidden" ref={mobileRef}></div>
+        <div className="md:hidden h-[250px] w-[300px]" ref={mobileRef}></div>
         {/* Desktop 728x90 */}
-        <div className="hidden md:block" ref={desktopRef}></div>
+        <div className="hidden md:block h-[90px] w-[728px]" ref={desktopRef}></div>
       </div>
     </div>
   );
@@ -113,7 +103,6 @@ export function StickySidebarAd() {
 /** Native poster-sized ad (same size as story cards) */
 export function NativePosterAd() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const adId = useRef(`container-${Math.random().toString(36).substr(2, 9)}-${Date.now()}`);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -134,9 +123,7 @@ export function NativePosterAd() {
 
   return (
     <div className="w-[136px] shrink-0 md:w-[164px]">
-      <div className="aspect-[2/3] rounded-md bg-gradient-to-br from-pal-highlight to-pal-elevated flex items-center justify-center border border-white/10">
-        <div ref={containerRef} id={adId.current}></div>
-      </div>
+      <div ref={containerRef} id="container-5d61c4106794fb6d7d92c75ce9c80650" className="aspect-[2/3]"></div>
     </div>
   );
 }
