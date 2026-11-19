@@ -90,7 +90,6 @@ export default function HomeView() {
         ) : (
           <div className="pb-10">
             {signedIn && filter === 'all' && <StoryShelf title="New from your subscriptions" path="/api/me/feed?limit=12" />}
-            <FooterBanner />
             <StoryShelf
               title="Popular right now"
               path={`/api/stories${query({ sort: 'popular', limit: 12, type })}`}
@@ -108,7 +107,6 @@ export default function HomeView() {
               path={`/api/stories${query({ sort: 'top-rated', limit: 12, type })}`}
               href={`/browse${query({ sort: 'top-rated', type })}`}
             />
-            <FooterBanner />
             {GENRE_SHELVES.map((genre) => (
               <StoryShelf
                 key={genre.slug}
@@ -117,7 +115,6 @@ export default function HomeView() {
                 href={`/genre/${genre.slug}`}
               />
             ))}
-            <FooterBanner />
             <StoryShelf
               title="New on the shelf"
               path={`/api/stories${query({ sort: 'new', limit: 12, type })}`}
