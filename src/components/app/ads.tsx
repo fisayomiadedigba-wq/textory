@@ -123,7 +123,7 @@ export function NativePosterAd() {
 
   return (
     <div className="w-[136px] shrink-0 md:w-[164px]">
-      <div ref={containerRef} id="container-5d61c4106794fb6d7d92c75ce9c80650" className="aspect-[2/3]"></div>
+      <div ref={containerRef} id="container-5d61c4106794fb6d7d92c75ce9c80650" className="aspect-[3/2]"></div>
     </div>
   );
 }
