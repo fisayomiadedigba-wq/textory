@@ -50,6 +50,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <meta name="apple-mobile-web-app-title" content={siteConfig.name} />
         <meta name="monetag" content="34ca57649f094fe28c4dc171372ee160" />
         {/* Monetag verification */}
+        <script dangerouslySetInnerHTML={{ __html: "(function(s){s.dataset.zone='12301142',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))" }} />
       </head>
       <body className="font-sans antialiased">
         <Providers>
