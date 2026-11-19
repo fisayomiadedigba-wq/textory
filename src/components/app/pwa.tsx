@@ -1,7 +1,7 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useSyncExternalStore } from 'react';
-import { CircleArrowDown } from 'lucide-react';
 import { cx } from './primitives';
 
 /** Chrome/Edge's install offer (`beforeinstallprompt`). Safari has none: people use Share → Add to Home Screen. */
@@ -93,7 +93,7 @@ export function InstallAppButton({
     setInstallPrompt(null); // an offer can only be used once; the browser sends a new one later
   };
 
-  const icon = <CircleArrowDown className={variant === 'menu' ? 'h-6 w-6' : variant === 'bar' ? 'h-5 w-5' : 'h-4 w-4'} />;
+  const icon = <Image src="/icon.png" alt="Textory" width={variant === 'menu' ? 24 : variant === 'bar' ? 20 : 16} height={variant === 'menu' ? 24 : variant === 'bar' ? 20 : 16} className="rounded" />;
   return (
     <button type="button" role={variant === 'dropdown' ? 'menuitem' : undefined} onClick={install} className={cx(VARIANTS[variant], className)}>
       {variant !== 'dropdown' && icon}

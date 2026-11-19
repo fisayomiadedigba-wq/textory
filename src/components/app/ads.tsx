@@ -7,12 +7,12 @@ import { X } from 'lucide-react';
 export function NativeAdBanner() {
   return (
     <div className="my-6 mx-4 md:mx-6">
-      <div className="relative h-[120px] w-full overflow-hidden rounded-lg bg-gradient-to-r from-pal-elevated to-pal-highlight border border-white/10">
+      <div className="relative h-[100px] w-full overflow-hidden rounded-lg bg-gradient-to-r from-pal-elevated to-pal-highlight border border-white/10">
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center">
             <p className="text-xs text-pal-subdued uppercase tracking-wider mb-1">Advertisement</p>
             <p className="text-lg font-bold text-pal-text">Your Ad Here</p>
-            <p className="text-sm text-pal-subdued">300x120 Native Banner</p>
+            <p className="text-sm text-pal-subdued">300x100 Native Banner</p>
           </div>
         </div>
       </div>
@@ -39,8 +39,8 @@ export function StickySidebarAd() {
         </button>
         <div className="p-3 pt-8">
           <p className="text-[10px] text-pal-subdued uppercase tracking-wider mb-1">Ad</p>
-          <div className="aspect-square rounded bg-gradient-to-br from-pal-highlight to-pal-elevated flex items-center justify-center border border-white/10">
-            <p className="text-xs font-bold text-pal-text text-center px-2">160x160<br/>Sidebar Ad</p>
+          <div className="h-[300px] rounded bg-gradient-to-br from-pal-highlight to-pal-elevated flex items-center justify-center border border-white/10">
+            <p className="text-xs font-bold text-pal-text text-center px-2">160x300<br/>Sidebar Ad</p>
           </div>
         </div>
       </div>
