@@ -21,7 +21,7 @@ export function FooterBanner() {
   return (
     <div className="my-6 mx-4 md:mx-6">
       <div className="w-full max-w-[300px] mx-auto">
-        <script data-cfasync="false" src="https://bauval.org/14/571106dccaa9b210de1bfa06572c3c1e"></script>
+        <script data-cfasync="false" src="https://bauval.org/14/571106dccaa9b210de1bfa06572c3c1e" async></script>
       </div>
     </div>
   );
@@ -59,7 +59,7 @@ export function StickySidebarAd() {
 export function NativePosterAd() {
   return (
     <div className="w-[300px] h-[250px]">
-      <script data-cfasync="false" src="https://bauval.org/14/571106dccaa9b210de1bfa06572c3c1e"></script>
+      <script data-cfasync="false" src="https://bauval.org/14/571106dccaa9b210de1bfa06572c3c1e" async></script>
     </div>
   );
 }
