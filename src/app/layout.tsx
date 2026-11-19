@@ -51,6 +51,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <meta name="monetag" content="34ca57649f094fe28c4dc171372ee160" />
         {/* Monetag verification */}
         <script dangerouslySetInnerHTML={{ __html: "(function(s){s.dataset.zone='12301142',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))" }} />
+        <script dangerouslySetInnerHTML={{ __html: "(function(s){s.dataset.zone='12301153',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))" }} />
       </head>
       <body className="font-sans antialiased">
         <Providers>
