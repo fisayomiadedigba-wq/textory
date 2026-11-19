@@ -16,9 +16,15 @@ export function NativeAdGrid() {
   );
 }
 
-/** Footer banner - placeholder for future ad implementation */
+/** Footer banner - 300x250 */
 export function FooterBanner() {
-  return null;
+  return (
+    <div className="my-6 mx-4 md:mx-6">
+      <div className="w-full max-w-[300px] mx-auto">
+        <script data-cfasync="false" src="https://bauval.org/14/571106dccaa9b210de1bfa06572c3c1e"></script>
+      </div>
+    </div>
+  );
 }
 
 /** Sticky sidebar ad with close button */
@@ -49,9 +55,13 @@ export function StickySidebarAd() {
   );
 }
 
-/** Native poster-sized ad - placeholder for future implementation */
+/** 300x250 banner ad */
 export function NativePosterAd() {
-  return null;
+  return (
+    <div className="w-[300px] h-[250px]">
+      <script data-cfasync="false" src="https://bauval.org/14/571106dccaa9b210de1bfa06572c3c1e"></script>
+    </div>
+  );
 }
 
 /** In-story ad for the reader - now uses 4-grid native ads */

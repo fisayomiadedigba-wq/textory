@@ -48,9 +48,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="apple-mobile-web-app-title" content={siteConfig.name} />
-        <meta name="monetag" content="34ca57649f094fe28c4dc171372ee160" />
-        {/* Monetag verification */}
-        <script src="https://quge5.com/88/tag.min.js" data-zone="312671" async data-cfasync="false"></script>
       </head>
       <body className="font-sans antialiased">
         <Providers>
