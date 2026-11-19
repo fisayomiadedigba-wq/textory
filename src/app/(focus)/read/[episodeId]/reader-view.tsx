@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, Heart, MessageCircle, Type } from 'lucide-react';
-import { InStoryAd, StickySidebarAd } from '@/components/app/ads';
+import { InStoryAd } from '@/components/app/ads';
 import { ReadCircle } from '@/components/app/cards';
 import { useDismiss } from '@/components/app/menu';
 import { Avatar } from '@/components/app/poster';
@@ -62,7 +62,6 @@ function Reader({ data }: { data: ReadingResponse }) {
 
   return (
     <div>
-      <StickySidebarAd />
       <header
         className={cx(
           'fixed inset-x-0 top-0 z-30 border-b border-white/5 backdrop-blur transition-transform duration-300',

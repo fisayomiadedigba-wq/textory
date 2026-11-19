@@ -6,7 +6,6 @@ import { signOut } from 'next-auth/react';
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { Bell, ChevronLeft, LogOut, Settings, SquarePen } from 'lucide-react';
 import { useCurrentUser } from '@/lib/client/hooks';
-import { StickySidebarAd } from './ads';
 import { UserAvatar } from './account-menu';
 import { InstallAppButton } from './pwa';
 import { BottomBar, MobileNav } from './bottom-bars';
@@ -52,7 +51,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <BottomBar />
           <MobileNav />
           {menuOpen && <MobileMenu onClose={() => setMenuOpen(false)} />}
-          <StickySidebarAd />
         </div>
       </MainScrollContext.Provider>
     </ShellContext.Provider>
