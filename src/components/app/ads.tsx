@@ -8,7 +8,7 @@ export function FooterBanner() {
   return (
     <div className="my-6 mx-4 md:mx-6">
       <div className="w-full max-w-[300px] mx-auto">
-        <NativePosterAd />
+        <NativeBannerAd />
       </div>
     </div>
   );
@@ -16,7 +16,7 @@ export function FooterBanner() {
 
 
 /** 300x250 banner ad */
-export function NativePosterAd() {
+export function NativeBannerAd() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -37,8 +37,8 @@ export function NativePosterAd() {
   }, []);
 
   return (
-    <div className="w-[136px] shrink-0 md:w-[164px]">
-      <div ref={containerRef} id="container-5d61c4106794fb6d7d92c75ce9c80650" className="aspect-[3/2]"></div>
+    <div className="w-[300px] h-[250px]">
+      <div ref={containerRef} id="container-5d61c4106794fb6d7d92c75ce9c80650" className="w-full h-full"></div>
     </div>
   );
 }
