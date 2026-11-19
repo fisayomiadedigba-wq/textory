@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, Heart, MessageCircle, Type } from 'lucide-react';
-import { InStoryAd } from '@/components/app/ads';
+import { FooterBanner } from '@/components/app/ads';
 import { ReadCircle } from '@/components/app/cards';
 import { useDismiss } from '@/components/app/menu';
 import { Avatar } from '@/components/app/poster';
@@ -114,7 +114,7 @@ function Reader({ data }: { data: ReadingResponse }) {
               // Sanitized on the server when it was saved (see src/lib/content.ts).
               dangerouslySetInnerHTML={{ __html: episode.content }}
             />
-            <InStoryAd />
+            <FooterBanner />
           </>
         ) : (
           <p className="mt-10 text-pal-subdued">This episode has no text yet.</p>
